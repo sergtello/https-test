@@ -19,5 +19,3 @@ btn.addEventListener('click', function onClick() {
         .catch(err => console.error(err));
 });
 
-
-
