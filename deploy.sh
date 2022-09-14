@@ -25,6 +25,7 @@ elif [ $LOCAL = $BASE ]; then
         echo "HTML file has changed"
     else
         echo "HTML file has NOT changed"
+    fi
 elif [ $REMOTE = $BASE ]; then
     echo "Need to push"
 else
