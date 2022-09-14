@@ -21,11 +21,10 @@ if [ $LOCAL = $REMOTE ]; then
     echo "The API ${API_ENV} instance is up-to-date"
 elif [ $LOCAL = $BASE ]; then
     echo "Need to pull"
-    git diff --quiet index.html; nochanges=$?
-    if [ $nochanges -eq 0 ]; then
-        echo "HTML file has NOT changed"
-    else
+    if [ git diff --exit-code index.html ]; then
         echo "HTML file has changed"
+    else
+        echo "HTML file has NOT changed"
     fi
 elif [ $REMOTE = $BASE ]; then
     echo "Need to push"
