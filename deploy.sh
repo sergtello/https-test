@@ -21,7 +21,7 @@ if [ $LOCAL = $REMOTE ]; then
     echo "The API ${API_ENV} instance is up-to-date"
 elif [ $LOCAL = $BASE ]; then
     echo "Need to pull"
-    if [ git diff --exit-code index.html ]; then
+    if git diff --exit-code 'index.html'; then
         echo "HTML file has changed"
     else
         echo "HTML file has NOT changed"
