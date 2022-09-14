@@ -18,9 +18,13 @@ REMOTE=$(git rev-parse "$UPSTREAM")
 BASE=$(git merge-base @ "$UPSTREAM")
 
 if [ $LOCAL = $REMOTE ]; then
-    echo "Up-to-date"
+    echo "The API ${API_ENV} instance is up-to-date"
 elif [ $LOCAL = $BASE ]; then
     echo "Need to pull"
+    if [[ $(git status --porcelain | grep "index.html") ]]; then
+        echo "HTML file has changed"
+    else
+        echo "HTML file has NOT changed"
 elif [ $REMOTE = $BASE ]; then
     echo "Need to push"
 else
