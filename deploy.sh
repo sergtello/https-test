@@ -21,7 +21,9 @@ if [ $LOCAL = $REMOTE ]; then
     echo "The API ${API_ENV} instance is up-to-date"
 elif [ $LOCAL = $BASE ]; then
     echo "Need to pull"
-    if git diff --exit-code 'index.html'; then
+    GIT_PULL=$(git pull)
+    echo "${GIT_PULL}"
+    if [[ $(echo "${GIT_PULL}" | grep 'index.html') ]]; then
         echo "HTML file has changed"
     else
         echo "HTML file has NOT changed"
@@ -32,18 +34,6 @@ else
     echo "Diverged"
 fi
 
-
-#read -r GIT_STATUS <<< "$(git status --porcelain)"
-#if [ -z "${GIT_STATUS}" ]; then
-#    # there are no changes
-#    echo "The API ${API_ENV} instance is up-to-date"
-#elif [[ $("${GIT_STATUS}" | grep ".html") ]]; then
-#    echo "Rebuilding image"
-#    echo "Installing dependencies"
-#    # there are changes
-#    else
-#      echo "Updating files"
-#fi
 
 # shellcheck disable=SC2143
 #if [[ $(git status --porcelain | grep ".env") ]]; then
